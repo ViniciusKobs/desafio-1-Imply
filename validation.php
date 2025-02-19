@@ -16,7 +16,7 @@ const MIN_PASSWORD_LENGTH = 8;
 const MAX_PASSWORD_LENGTH = 64;
 const MAX_NAME_LENGTH = 64;
 const MAX_AGE = 150;
-const MAX_EMAIL_LENGTH = 64;
+const MAX_EMAIL_LENGTH = 254;
 const MAX_EMAIL_LOCAL_LENGTH = 63;
 
 // https://emailregex.com/
@@ -143,7 +143,7 @@ function is_valid_cpf($cpf) {
 // there are two ways of doing this:
 // 1 - is to use a huge or multiple regular expressions, which can be problematic
 // 2 - is to do a basic validation, pass to the email server, and catch an exception if invalid
-// https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html#email-address-validation
+// https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
 function is_valid_email_basic($email) {
     // is a string
     // do basic email validation
