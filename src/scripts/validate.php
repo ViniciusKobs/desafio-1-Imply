@@ -1,10 +1,6 @@
 <?php
 
-const MAX_NAME_LENGTH = 64;
-const MAX_AGE = 150;
-const MAX_EMAIL_LENGTH = 254;
-const MIN_PASSWORD_LENGTH = 8;
-const MAX_PASSWORD_LENGTH = 64;
+require_once "constants.php";
 
 function validate() : void {
     $data = [
@@ -26,25 +22,27 @@ function validate() : void {
     validate_password($data["password"], $errors);
     confirm_password($data["password"], $data["confirm_password"], $errors);
 
+    // erasing password history for security reasons
+    unset($data["password"], $data["confirm_password"]);
+
     if (empty($errors)) {
-        header("Location: /forms/success.php");
+        // TODO: send data to data.json
+        header("Location: " . SUCCESS_PATH);
         return;
     }
 
-    // erasing password history for security reasons
-    $data["password"] = ""; $data["confirm_password"] = "";
 
-    header("Location: /forms/index.php?" . http_build_query(array_merge($data, $errors)));
+    header("Location: " . ERROR_PATH . http_build_query(array_merge($data, $errors)));
 }
 
 function validate_name($name, &$errors) : void {
     if (empty($name)) {
-        $errors["name_error"] = "Campo nome é obrigatorio";
+        $errors["name_error"] = "NAME_MISSING";
         return;
     }
 
     if (strlen($name) > MAX_NAME_LENGTH) {
-        $errors["name_error"] = "Nome deve ter até " . MAX_NAME_LENGTH . "caracteres";
+        $errors["name_error"] = "NAME_LARGE";
     }
 
     // might add rule that prohibits numbers
@@ -53,12 +51,12 @@ function validate_name($name, &$errors) : void {
 function validate_surname($name, &$errors) : void {
     // not sure if surname is mandatory
     if (empty($name)) {
-        $errors["surname_error"] = "Campo sobrenome é obrigatorio";
+        $errors["surname_error"] = "SURNAME_MISSING";
         return;
     }
 
     if (strlen($name) > MAX_NAME_LENGTH) {
-        $errors["surname_error"] = "Sobrenome deve ter até " . MAX_NAME_LENGTH . " caracteres";
+        $errors["surname_error"] = "SURNAME_LARGE";
     }
 
     // might add rule that prohibits numbers
@@ -66,92 +64,92 @@ function validate_surname($name, &$errors) : void {
 
 function validate_age($age, &$errors) : void {
     if ($age < 0 || $age > MAX_AGE) {
-        $errors["age_error"] = "Campo idade deve ser entre 0 e " . MAX_AGE;
+        $errors["age_error"] = "AGE_INVALID";
     }
 }
 
 function validate_email($email, &$errors) : void {
     if (empty($email)) {
-        $errors["email_error"] = "Campo email é obrigatorio";
+        $errors["email_error"] = "EMAIL_MISSING";
         return;
     }
 
     if (strlen($email) > MAX_EMAIL_LENGTH) {
-        $errors["email_error"] = "Campo email deve ter até" . MAX_EMAIL_LENGTH . " caracteres";
+        $errors["email_error"] = "EMAIL_LARGE";
         return;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors["email_error"] = "Email invalido";
+        $errors["email_error"] = "EMAIL_INVALID";
     }
 }
 function validate_password($password, &$errors) : void {
     if (empty($password)) {
-        $errors["password_error"] = "Campo senha é obrigatorio";
+        $errors["password_error"] = "PASSWORD_MISSING";
         return;
     }
 
     if (strlen($password) < MIN_PASSWORD_LENGTH) {
-        $errors["password_error"] = "Campo senha deve ter no minimo 8 caracteres";
+        $errors["password_error"] = "PASSWORD_SMALL";
         return;
     }
 
     if (strlen($password) > MAX_PASSWORD_LENGTH) {
-        $errors["password_error"] = "Campo senha deve ter no maximo 64 caracteres";
+        $errors["password_error"] = "PASSWORD_LARGE";
         return;
     }
 
     if (!preg_match('/[a-z]/', $password)) {
-        $errors["password_error"] = "Campo senha deve ter pelo menos uma letra minuscula";
+        $errors["password_error"] = "PASSWORD_LOWER";
         return;
     }
 
     if (!preg_match('/[A-Z]/', $password)) {
-        $errors["password_error"] = "Campo senha deve ter pelo menos uma letra maiuscula";
+        $errors["password_error"] = "PASSWORD_UPPER";
         return;
     }
 
     if (!preg_match('/[0-9]/', $password)) {
-        $errors["password_error"] = "Campo senha deve ter pelo menos um numero";
+        $errors["password_error"] = "PASSWORD_NUMBER";
         return;
     }
 
     if (!preg_match('/[\W_]/', $password)) {
-        $errors["password_error"] = "Campo senha deve ter pelo menos um caracter especial";
+        $errors["password_error"] = "PASSWORD_SPECIAL";
     }
 }
 
 function confirm_password($password, $confirm_password, &$errors) : void {
     if (empty($confirm_password)) {
-        $errors["confirm_password_error"] = "Campo confirmar senha é obrigatorio";
+        $errors["confirm_password_error"] = "CONFIRM_PASSWORD_MISSING";
         return;
     }
 
     if ($password !== $confirm_password) {
-        $errors["confirm_password_error"] = "Senhas nao conferem";
+        $errors["confirm_password_error"] = "CONFIRM_PASSWORD_INVALID";
     }
 }
 
 function validate_cpf($cpf, &$errors) : void {
     if (empty($cpf)) {
-        $errors["cpf_error"] = "Campo cpf é obrigatorio";
+        $errors["cpf_error"] = "CPF_MISSING";
         return;
     }
 
     $formated_cpf = preg_replace('/[.-]/', '', $cpf);
 
     if (strlen($formated_cpf) !== 11) {
-        $errors["cpf_error"] = "Campo cpf deve ter 11 digitos";
+        $errors["cpf_error"] = "CPF_WRONG_SIZE";
         return;
     }
 
     if (!preg_match('/^\d+$/', $formated_cpf)) {
-        $errors["cpf_error"] = "Campo cpf deve ter somente digitos";
+        $errors["cpf_error"] = "CPF_NUMBER";
         return;
     }
 
     if (!is_valid_cpf($formated_cpf)) {
-        $errors["cpf_error"] = "CPF invalido";
+        $errors["cpf_error"] = "CPF_INVALID";
     }
 }
 
