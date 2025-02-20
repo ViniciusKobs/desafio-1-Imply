@@ -12,7 +12,7 @@
 # for any unintended consequences or damages resulting from its usage.
 
 arch_path="/srv/http/forms/"
-ubuntu_path="/var/www/forms/"
+ubuntu_path="/var/www/html/forms/"
 
 if [ -f /etc/os-release ]; then
   . /etc/os-release

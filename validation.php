@@ -39,7 +39,7 @@ function test_functions() {
         echo is_valid_name($valid_data["surname"]) ? "\033[32mSobrenome Valido\n\033[0m" : "\033[31mSobrenome Invalido\033[0m\n";
         echo is_valid_age($valid_data["age"]) ? "\033[32mIdade Valida\n\033[0m" : "\033[31mIdade Invalida\033[0m\n";
         echo is_valid_email_regex($valid_data["email"]) ? "\033[32mE-mail Valido\n\033[0m" : "\033[31mE-mail Invalido\033[0m\n";
-        echo is_valid_cpf($valid_data["cpf"]) ? "\033[32mCPF Valido\n\033[0m" : "\033[31mCPF Invalido\033[0m\n";
+//        echo is_valid_cpf($valid_data["cpf"]) ? "\033[32mCPF Valido\n\033[0m" : "\033[31mCPF Invalido\033[0m\n";
         echo is_valid_password($valid_data["password"]) ? "\033[32mSenha Valida\n\033[0m" : "\033[31mSenha Invalida\033[0m\n";
         echo ($valid_data["password"] === $valid_data["confirm_password"]) ? "\033[32mSenhas Conferem\n\033[0m" : "\033[31mSenhas Não Conferem\033[0m\n";
         echo validate($valid_data) ? "\033[32mDados Validos\n\n\033[0m" : "\033[31mDados Invalidos\033[0m\n\n";
@@ -57,7 +57,7 @@ function validate($data) {
         is_valid_name($data["surname"]) &&
         is_valid_age($data["age"]) &&
         is_valid_email_regex($data["email"]) &&
-        is_valid_cpf($data["cpf"]) &&
+//        is_valid_cpf($data["cpf"]) &&
         is_valid_password($data["password"]) &&
         $data["password"] === $data["confirm_password"]
     ;
@@ -108,39 +108,39 @@ function is_valid_password($password) {
 }
 
 // https://www.macoratti.net/alg_cpf.htm
-function is_valid_cpf($cpf) {
-    // is an integer
-    // do cpf validation (module 11)
-
-    $formated_cpf = preg_replace('/[.-]/', '', $cpf);
-
-    if (
-        !is_string($formated_cpf) &&
-        strlen($formated_cpf) === 11 &&
-        !preg_match('/^\d+$/', $formated_cpf)
-    ) {
-        return false;
-    }
-
-    $digits = array_map('intval', str_split($formated_cpf));
-
-    $d1 = 0;
-    for ($i = 0; $i < 9; $i++) {
-        $d1 += $digits[$i] * (10 - $i);
-    }
-    $d1 = ($d1 % 11 < 2) ? 0 : 11 - ($d1 % 11);
-
-    $d2 = 0;
-    for ($i = 0; $i < 10; $i++) {
-        $d2 += $digits[$i] * (11 - $i);
-    }
-    $d2 = ($d2 % 11 < 2) ? 0 : 11 - ($d2 % 11);
-
-    return
-        $digits[9] === $d1 &&
-        $digits[10] === $d2
-        ;
-}
+//function is_valid_cpf($cpf) {
+//    // is an integer
+//    // do cpf validation (module 11)
+//
+//    $formated_cpf = preg_replace('/[.-]/', '', $cpf);
+//
+//    if (
+//        !is_string($formated_cpf) &&
+//        strlen($formated_cpf) === 11 &&
+//        !preg_match('/^\d+$/', $formated_cpf)
+//    ) {
+//        return false;
+//    }
+//
+//    $digits = array_map('intval', str_split($formated_cpf));
+//
+//    $d1 = 0;
+//    for ($i = 0; $i < 9; $i++) {
+//        $d1 += $digits[$i] * (10 - $i);
+//    }
+//    $d1 = ($d1 % 11 < 2) ? 0 : 11 - ($d1 % 11);
+//
+//    $d2 = 0;
+//    for ($i = 0; $i < 10; $i++) {
+//        $d2 += $digits[$i] * (11 - $i);
+//    }
+//    $d2 = ($d2 % 11 < 2) ? 0 : 11 - ($d2 % 11);
+//
+//    return
+//        $digits[9] === $d1 &&
+//        $digits[10] === $d2
+//        ;
+//}
 
 // there are two ways of doing this:
 // 1 - is to use a huge or multiple regular expressions, which can be problematic
@@ -172,6 +172,13 @@ function is_valid_email_regex($email) {
         ;
 }
 
-// TODO: implement native php email validation function
+function is_valid_email_fvar($email) {
+    // is a string
+    return
+        is_string($email) &&
+        strlen($email) <= MAX_EMAIL_LENGTH &&
+        filter_var($email, FILTER_VALIDATE_EMAIL)
+    ;
+}
 
 test_functions();

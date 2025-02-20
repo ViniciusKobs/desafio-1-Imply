@@ -35,13 +35,16 @@ footer {
 form {
     display: flex;
     flex-direction: column;
-
-    height: 40rem;
-    width: 35rem;
+    height: 30rem;
+    width: 25rem;
     padding: 1rem;
     background-color: gray;
 }
 
 #form-title {
     text-align: center;
+}
+
+.form-error {
+    color: red;
 }
