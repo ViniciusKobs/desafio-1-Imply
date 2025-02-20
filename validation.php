@@ -48,6 +48,8 @@ function test_functions() {
     }
 }
 
+// TODO: sanitize strings (eg. trim)
+
 function validate($data) {
     if (!is_data($data)) { return false; }
     return 
@@ -169,5 +171,7 @@ function is_valid_email_regex($email) {
         preg_match(EMAIL_REGEX, $email)
         ;
 }
+
+// TODO: implement native php email validation function
 
 test_functions();

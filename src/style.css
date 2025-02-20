@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 5rem;
+    background-color: gray;
+}
+
+main {
+    flex: 1;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer {
+    height: 2rem;
+    background-color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+
+    height: 40rem;
+    width: 35rem;
+    padding: 1rem;
+    background-color: gray;
+}
+
+#form-title {
+    text-align: center;
+}
