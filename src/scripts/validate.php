@@ -35,12 +35,9 @@ function validate() : void {
     header("Location: " . ERROR_URL . http_build_query(array_merge($data, $errors)));
 }
 
-// TODO: implement better string sanitization
 function sanitize_data ($data) : array {
-    return array_map(function ($value) {return trim($value);}, $data);
+    return array_map(function ($value) {return htmlspecialchars(trim($value));}, $data);
 }
-
-// TODO: check in every validation for potentially harmful characters eg. HTML and SQL related
 
 function validate_name($name, &$errors) : void {
     if (empty($name)) {
