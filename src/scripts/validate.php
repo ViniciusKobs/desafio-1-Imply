@@ -11,7 +11,8 @@ function validate() : void {
         "cpf" => $_POST["cpf"] ?? '',
         "password" => $_POST["password"] ?? '',
         "confirm_password" => $_POST["confirm-password"] ?? ''
-    ]; $data = sanitize_data($data);
+    ];
+    $data = sanitize_data($data);
     $errors = [];
 
     validate_name($data["name"], $errors);
@@ -38,6 +39,8 @@ function validate() : void {
 function sanitize_data ($data) : array {
     return array_map(function ($value) {return trim($value);}, $data);
 }
+
+// TODO: check in every validation for potentially harmful characters eg. HTML and SQL related
 
 function validate_name($name, &$errors) : void {
     if (empty($name)) {
