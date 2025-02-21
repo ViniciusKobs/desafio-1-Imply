@@ -16,11 +16,11 @@
     <main>
         <div id="success-container">
             <div id="success-box" class="shadow-box">
-                <p class="form-title colored-box">Successo</p>
+                <p class="form-title colored-box">Sucesso</p>
                 <div id="success-message-box">
                     <img src="assets/icon2.png" alt="icon">
                     <div>
-                        <p>Registro concluido com sucesso, entraremos em contato em breve</p>
+                        <p>Seu registro foi concluído com sucesso. Entraremos em contato em breve.</p>
                     </div>
                 </div>
                 <div id="success-button-box">
@@ -29,6 +29,6 @@
             </div>
         </div>
     </main>
-    <footer>made by <a href="https://github.com/ViniciusKobs">Vinícius Kobs</a></footer>
+    <footer>feito por <a href="https://github.com/ViniciusKobs">Vinícius Kobs</a></footer>
 </body>
 </html>

@@ -2,35 +2,35 @@
 
 require_once "constants.php";
 
-// TODO: write better error messages
 $errors = [
-    "NAME_MISSING" => "Nome é obrigatorio",
-    "NAME_NUMBER" => "Nome não deve possuír digitos",
-    "NAME_LARGE" => "Nome deve ter até " . MAX_NAME_LENGTH . " caracteres",
+    "NAME_MISSING" => "O campo nome é obrigatório.",
+    "NAME_NUMBER" => "O nome não deve conter dígitos.",
+    "NAME_LARGE" => "O nome deve ter no máximo " . MAX_NAME_LENGTH . " caracteres.",
 
-    "SURNAME_MISSING" => "Sobrenome é obrigatorio",
-    "SURNAME_NUMBER" => "Sobrenome não deve possuír digitos",
-    "SURNAME_LARGE" => "Sobrenome deve ter até " . MAX_NAME_LENGTH . " caracteres",
+    "SURNAME_MISSING" => "O campo sobrenome é obrigatório.",
+    "SURNAME_NUMBER" => "O sobrenome não deve conter dígitos.",
+    "SURNAME_LARGE" => "O sobrenome deve ter no máximo " . MAX_NAME_LENGTH . " caracteres.",
 
-    "AGE_INVALID" => "Idade deve ser entre 0 e " . MAX_AGE . " anos",
+    "AGE_MISSING" => "O campo idade é obrigatório.",
+    "AGE_INVALID" => "A idade deve estar entre 0 e " . MAX_AGE . " anos.",
 
-    "EMAIL_MISSING" => "Email é obrigatorio",
-    "EMAIL_LARGE" => "Email deve ter até " . MAX_EMAIL_LENGTH . " caracteres",
-    "EMAIL_INVALID" => "Email invalido",
+    "EMAIL_MISSING" => "O campo e-mail é obrigatório.",
+    "EMAIL_LARGE" => "O e-mail deve ter no máximo " . MAX_EMAIL_LENGTH . " caracteres.",
+    "EMAIL_INVALID" => "Este e-mail é inválido.",
 
-    "PASSWORD_MISSING" => "Senha é obrigatorio",
-    "PASSWORD_SMALL" => "Senha deve ter no minimo " . MIN_PASSWORD_LENGTH . " caracteres",
-    "PASSWORD_LARGE" => "Senha deve ter no maximo " . MAX_PASSWORD_LENGTH . " caracteres",
-    "PASSWORD_LOWER" => "Senha deve ter pelo menos uma letra minuscula",
-    "PASSWORD_UPPER" => "Senha deve ter pelo menos uma letra maiuscula",
-    "PASSWORD_NUMBER" => "Senha deve ter pelo menos um numero",
-    "PASSWORD_SPECIAL" => "Senha deve ter pelo menos um caracter especial",
+    "PASSWORD_MISSING" => "O campo senha é obrigatório.",
+    "PASSWORD_SMALL" => "A senha deve ter no mínimo " . MIN_PASSWORD_LENGTH . " caracteres.",
+    "PASSWORD_LARGE" => "A senha deve ter no máximo " . MAX_PASSWORD_LENGTH . " caracteres.",
+    "PASSWORD_LOWER" => "A senha deve conter pelo menos uma letra minúscula.",
+    "PASSWORD_UPPER" => "A senha deve conter pelo menos uma letra maiúscula.",
+    "PASSWORD_NUMBER" => "A senha deve conter pelo menos um número.",
+    "PASSWORD_SPECIAL" => "A senha deve conter pelo menos um caractere especial.",
 
-    "CONFIRM_PASSWORD_MISSING" => "Confirmar senha é obrigatorio",
-    "CONFIRM_PASSWORD_INVALID" => "Senhas nao conferem",
+    "CONFIRM_PASSWORD_MISSING" => "A confirmação da senha é obrigatória.",
+    "CONFIRM_PASSWORD_INVALID" => "As senhas não coincidem.",
 
-    "CPF_MISSING" => "Cpf é obrigatorio",
-    "CPF_WRONG_SIZE" => "Cpf deve ter 11 digitos",
-    "CPF_NUMBER" => "Cpf deve ter somente digitos",
-    "CPF_INVALID" => "CPF invalido"
+    "CPF_MISSING" => "O campo CPF é obrigatório.",
+    "CPF_WRONG_SIZE" => "O CPF deve conter 11 dígitos.",
+    "CPF_NUMBER" => "O CPF deve conter apenas dígitos.",
+    "CPF_INVALID" => "Este CPF é inválido."
 ];

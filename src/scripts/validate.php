@@ -40,8 +40,8 @@ function validate_name($name, &$errors) : void {
         return;
     }
 
-    if (preg_match('/[0-9]/', $name)) {
-        $errors["password_error"] = "NAME_NUMBER";
+    if (preg_match('/\d/', $name)) {
+        $errors["name_error"] = "NAME_NUMBER";
         return;
     }
 
@@ -51,14 +51,13 @@ function validate_name($name, &$errors) : void {
 }
 
 function validate_surname($name, &$errors) : void {
-    // not sure if surname is mandatory
     if (empty($name)) {
         $errors["surname_error"] = "SURNAME_MISSING";
         return;
     }
 
-    if (preg_match('/[0-9]/', $name)) {
-        $errors["password_error"] = "SURNAME_NUMBER";
+    if (preg_match('/\d/', $name)) {
+        $errors["surname_error"] = "SURNAME_NUMBER";
         return;
     }
 
@@ -68,6 +67,11 @@ function validate_surname($name, &$errors) : void {
 }
 
 function validate_age($age, &$errors) : void {
+    if (empty($age)) {
+        $errors["age_error"] = "AGE_MISSING";
+        return;
+    }
+
     if ($age < 0 || $age > MAX_AGE) {
         $errors["age_error"] = "AGE_INVALID";
     }

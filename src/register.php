@@ -14,7 +14,7 @@
 <body>
     <header><div style="height:1.3rem;"></div></header>
     <main>
-        <p id="page-title">Registrar</p>
+        <p id="page-title">Cadastro</p>
         <form class="shadow-box" action="scripts/validate.php" method="POST">
             <p class="form-title colored-box">Formulário</p>
             <div id="form-container" class="inverse-shadow-box">
@@ -40,8 +40,8 @@
                         ?>
                     </div>
                     <div class="form-input">
-                        <label for="form-email">Email</label>
-                        <input type="text" id="form-email" class="inverse-shadow-box" name="email" placeholder="Email" value=<?php echo $_GET["email"] ?? "" ?>>
+                        <label for="form-email">E-mail</label>
+                        <input type="text" id="form-email" class="inverse-shadow-box" name="email" placeholder="E-mail" value=<?php echo $_GET["email"] ?? "" ?>>
                         <?php
                             if (isset($_GET["email_error"])) {
                                 echo "<p class=\"form-error\">" . $errors[$_GET["email_error"]] . "</p>";
@@ -50,8 +50,6 @@
                     </div>
                     <div class="form-input">
                         <label for="form-cpf">CPF</label>
-                        <!-- for now use type text here, so I don't need to deal with leading 0s -->
-                        <!-- might implement a javascript maks for live formatting and blocking invalid characters -->
                         <input type="text" id="form-cpf" class="inverse-shadow-box" name="cpf" placeholder="CPF" value=<?php echo $_GET["cpf"] ?? "" ?>>
                         <?php
                             if (isset($_GET["cpf_error"])) {
@@ -91,6 +89,6 @@
             </div>
         </form>
     </main>
-    <footer>made by <a href="https://github.com/ViniciusKobs">Vinícius Kobs</a></footer>
+    <footer>feito por <a href="https://github.com/ViniciusKobs">Vinícius Kobs</a></footer>
 </body>
 </html>
