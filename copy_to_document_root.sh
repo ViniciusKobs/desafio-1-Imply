@@ -21,22 +21,26 @@ if [ -f /etc/os-release ]; then
     if [ ! -d "$arch_path" ]; then
       echo "Creating directory"
       sudo mkdir "$arch_path"
-      sudo chown "$USER":"$USER" "$arch_path"
-      chmod 755 "$arch_path"
+      sudo chown "$USER":"http" "$arch_path"
+      chmod 775 "$arch_path"
     else
       rm -rf "$arch_path"*
     fi
     cp -r ./src/* "$arch_path"
+    chown -R "$USER":"http" "$arch_path"
+    chmod -R 775 "$arch_path"
   elif [ "$OS" = "ubuntu" ]; then
     if [ ! -d "$ubuntu_path" ]; then
       echo "Creating directory"
       sudo mkdir "$ubuntu_path"
-      sudo chown "$USER":"$USER" "$ubuntu_path"
-      chmod 755 "$ubuntu_path"
+      sudo chown "$USER":"www-data" "$ubuntu_path"
+      chmod 775 "$ubuntu_path"
     else
       rm -rf "$ubuntu_path"*
     fi
     cp -r ./src/* "$ubuntu_path"
+    chown -R "$USER":"www-data" "$ubuntu_path"
+    chmod -R 775 "$ubuntu_path"
   else
     echo "Unsupported OS: $OS"
   fi

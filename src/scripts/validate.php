@@ -26,13 +26,12 @@ function validate() : void {
     unset($data["password"], $data["confirm_password"]);
 
     if (empty($errors)) {
-        // TODO: send data to data.json
-        header("Location: " . SUCCESS_PATH);
+        store_data($data);
+        header("Location: " . SUCCESS_URL);
         return;
     }
 
-
-    header("Location: " . ERROR_PATH . http_build_query(array_merge($data, $errors)));
+    header("Location: " . ERROR_URL . http_build_query(array_merge($data, $errors)));
 }
 
 function validate_name($name, &$errors) : void {
@@ -83,6 +82,7 @@ function validate_email($email, &$errors) : void {
         $errors["email_error"] = "EMAIL_INVALID";
     }
 }
+
 function validate_password($password, &$errors) : void {
     if (empty($password)) {
         $errors["password_error"] = "PASSWORD_MISSING";
@@ -169,6 +169,12 @@ function is_valid_cpf($cpf) : bool {
     $d2 = ($d2 % 11 < 2) ? 0 : 11 - ($d2 % 11);
 
     return $digits[9] === $d1 && $digits[10] === $d2;
+}
+
+function store_data($data) : void {
+    $storage = json_decode(file_get_contents(getcwd() . STORAGE_PATH), true);
+    $storage[] = $data;
+    file_put_contents(getcwd() . STORAGE_PATH, json_encode($storage));
 }
 
 validate();
