@@ -60,7 +60,9 @@ form {
 
 #page-title {
     font-size: 3rem;
+    font-weight: bold;
     padding: 4rem;
+    animation: color-change 1.3s infinite;
 }
 
 .form-title {
@@ -105,7 +107,7 @@ form {
     box-shadow: -.1rem -.1rem inset, .1rem .1rem inset lightgray;
 }
 
-#form-submit:focus {
+.form-button:focus {
     box-shadow: -.1rem -.1rem inset lightgray, .1rem .1rem inset;
 }
 
@@ -135,6 +137,7 @@ form {
     background-image: url("assets/img1.jpg");
     background-size: cover;
     background-position: center;
+    animation: mirror 1.5s infinite steps(1);
 }
 
 input[type=number] {
@@ -177,4 +180,17 @@ input[type=number] {
 
 #success-button-box button {
     width: 8rem;
+}
+
+@keyframes color-change {
+    0% { color: red; }
+    33% { color: green; }
+    66% { color: blue; }
+    100% { color: red; }
+}
+
+@keyframes mirror {
+    0% { transform: scaleX(-1); }
+    50% { transform: scaleX(1); }
+    100% { transform: scaleX(-1); }
 }

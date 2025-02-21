@@ -16,11 +16,21 @@
     <main>
         <div id="success-container">
             <div id="success-box" class="shadow-box">
-                <p class="form-title colored-box">Sucesso</p>
+                <p class="form-title colored-box">
+                    <?php echo (($_GET["status"] ?? "FAILURE") === "SUCCESS") ? "Sucesso" : "Fracasso" ?>
+                </p>
                 <div id="success-message-box">
-                    <img src="assets/icon2.png" alt="icon">
+                    <?php
+                        echo (($_GET["status"] ?? "FAILURE") === "SUCCESS") ?
+                            "<img src='assets/icon2.png' alt='icon'>" :
+                            "<img src='assets/icon3.png' alt='icon'>"
+                    ?>
                     <div>
-                        <p>Seu registro foi concluído com sucesso. Entraremos em contato em breve.</p>
+                        <?php
+                            echo (($_GET["status"] ?? "FAILURE") === "SUCCESS") ?
+                                "<p>Seu cadastro foi concluído com sucesso. Entraremos em contato em breve.</p>" :
+                                "<p>Houve um erro ao realizar o seu cadastro. Tente novamente mais tarde.</p>"
+                        ?>
                     </div>
                 </div>
                 <div id="success-button-box">

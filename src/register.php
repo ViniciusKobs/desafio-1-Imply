@@ -14,7 +14,7 @@
 <body>
     <header><div style="height:1.3rem;"></div></header>
     <main>
-        <p id="page-title">Cadastro</p>
+        <p id="page-title" class="color-change-effect">Cadastro</p>
         <form class="shadow-box" action="scripts/validate.php" method="POST">
             <p class="form-title colored-box">Formulário</p>
             <div id="form-container" class="inverse-shadow-box">

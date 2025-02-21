@@ -26,8 +26,8 @@ function validate() : void {
     unset($data["password"], $data["confirm_password"]);
 
     if (empty($errors)) {
-        store_data($data);
-        header("Location: " . SUCCESS_URL);
+        $status = store_data($data);
+        header("Location: " . CONFIRMATION_URL . http_build_query(["status" => $status ? "SUCCESS" : "FAILURE"]));
         return;
     }
 
@@ -181,10 +181,21 @@ function is_valid_cpf($cpf) : bool {
     return $digits[9] === $d1 && $digits[10] === $d2;
 }
 
-function store_data($data) : void {
-    $storage = json_decode(file_get_contents(getcwd() . STORAGE_PATH), true);
+function store_data($data) : bool {
+    $path = getcwd() . STORAGE_PATH;
+
+    $content = file_get_contents($path);
+    if ($content === false) { return false; }
+
+    $storage = json_decode($content, true);
+    if ($storage === NULL && !empty(trim($content))) { return false; }
+
     $storage[] = $data;
-    file_put_contents(getcwd() . STORAGE_PATH, json_encode($storage));
+
+    $status = file_put_contents($path, json_encode($storage));
+    if ($status === false) { return false; }
+
+    return true;
 }
 
 validate();
