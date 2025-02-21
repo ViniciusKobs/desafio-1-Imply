@@ -11,7 +11,7 @@ function validate() : void {
         "cpf" => $_POST["cpf"] ?? '',
         "password" => $_POST["password"] ?? '',
         "confirm_password" => $_POST["confirm-password"] ?? ''
-    ];
+    ]; $data = sanitize_data($data);
     $errors = [];
 
     validate_name($data["name"], $errors);
@@ -32,6 +32,11 @@ function validate() : void {
     }
 
     header("Location: " . ERROR_URL . http_build_query(array_merge($data, $errors)));
+}
+
+// TODO: implement better string sanitization
+function sanitize_data ($data) : array {
+    return array_map(function ($value) {return trim($value);}, $data);
 }
 
 function validate_name($name, &$errors) : void {
