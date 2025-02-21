@@ -6,5 +6,5 @@ const MAX_EMAIL_LENGTH = 254;
 const MIN_PASSWORD_LENGTH = 8;
 const MAX_PASSWORD_LENGTH = 64;
 const SUCCESS_URL = "/forms/success.php";
-const ERROR_URL = "/forms/index.php?";
+const ERROR_URL = "/forms/register.php?";
 const STORAGE_PATH = "/../storage.json";

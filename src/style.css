@@ -2,6 +2,12 @@
     --light-gray: #a1a1a1;
 }
 
+@media (max-width: 1366px) {
+    :root {
+        font-size: 10px;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -43,6 +49,7 @@ footer {
 }
 
 form {
+    margin-bottom: 5rem;
     display: flex;
     flex-direction: column;
     min-height: 30rem;
@@ -56,7 +63,7 @@ form {
     padding: 4rem;
 }
 
-#form-title {
+.form-title {
     font-size: 1.5rem;
     text-align: center;
     margin-bottom: .6rem;
@@ -91,7 +98,7 @@ form {
     color: red;
 }
 
-#form-submit {
+.form-button {
     margin-top: 0.6rem;
     height: 2rem;
     background-color: var(--light-gray);
@@ -132,4 +139,42 @@ form {
 
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+#success-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#success-box {
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    padding: .6rem;
+    background-color: var(--light-gray);
+}
+
+#success-message-box {
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#success-message-box img {
+    width: 3rem;
+}
+
+#success-button-box {
+    margin-bottom: .6rem;
+    display: flex;
+    justify-content: center;
+}
+
+#success-button-box button {
+    width: 8rem;
 }

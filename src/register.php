@@ -12,11 +12,11 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <header></header>
+    <header><div style="height:1.3rem;"></div></header>
     <main>
         <p id="page-title">Registrar</p>
         <form class="shadow-box" action="scripts/validate.php" method="POST">
-            <p id="form-title" class="colored-box">Formulário</p>
+            <p class="form-title colored-box">Formulário</p>
             <div id="form-container" class="inverse-shadow-box">
                 <div id="kiwi" class="form-container-child"></div>
                 <div class="separator"></div>
@@ -86,7 +86,7 @@
                             }
                         ?>
                     </div>
-                    <button id="form-submit" type="submit">Enviar</button>
+                    <button id="form-submit" class="form-button" type="submit">Enviar</button>
                 </div>
             </div>
         </form>

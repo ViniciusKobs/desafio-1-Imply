@@ -5,9 +5,11 @@ require_once "constants.php";
 // TODO: write better error messages
 $errors = [
     "NAME_MISSING" => "Nome é obrigatorio",
+    "NAME_NUMBER" => "Nome não deve possuír digitos",
     "NAME_LARGE" => "Nome deve ter até " . MAX_NAME_LENGTH . " caracteres",
 
     "SURNAME_MISSING" => "Sobrenome é obrigatorio",
+    "SURNAME_NUMBER" => "Sobrenome não deve possuír digitos",
     "SURNAME_LARGE" => "Sobrenome deve ter até " . MAX_NAME_LENGTH . " caracteres",
 
     "AGE_INVALID" => "Idade deve ser entre 0 e " . MAX_AGE . " anos",

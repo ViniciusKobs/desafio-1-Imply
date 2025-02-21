@@ -27,7 +27,7 @@ if [ -f /etc/os-release ]; then
       rm -rf "$arch_path"*
     fi
     cp -r ./src/* "$arch_path"
-    chown -R "$USER":"http" "$arch_path"
+    sudo chown -R "$USER":"http" "$arch_path"
     chmod -R 775 "$arch_path"
   elif [ "$OS" = "ubuntu" ]; then
     if [ ! -d "$ubuntu_path" ]; then
@@ -39,7 +39,7 @@ if [ -f /etc/os-release ]; then
       rm -rf "$ubuntu_path"*
     fi
     cp -r ./src/* "$ubuntu_path"
-    chown -R "$USER":"www-data" "$ubuntu_path"
+    sudo chown -R "$USER":"www-data" "$ubuntu_path"
     chmod -R 775 "$ubuntu_path"
   else
     echo "Unsupported OS: $OS"

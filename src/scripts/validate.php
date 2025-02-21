@@ -40,11 +40,14 @@ function validate_name($name, &$errors) : void {
         return;
     }
 
+    if (preg_match('/[0-9]/', $name)) {
+        $errors["password_error"] = "NAME_NUMBER";
+        return;
+    }
+
     if (strlen($name) > MAX_NAME_LENGTH) {
         $errors["name_error"] = "NAME_LARGE";
     }
-
-    // might add rule that prohibits numbers
 }
 
 function validate_surname($name, &$errors) : void {
@@ -54,11 +57,14 @@ function validate_surname($name, &$errors) : void {
         return;
     }
 
+    if (preg_match('/[0-9]/', $name)) {
+        $errors["password_error"] = "SURNAME_NUMBER";
+        return;
+    }
+
     if (strlen($name) > MAX_NAME_LENGTH) {
         $errors["surname_error"] = "SURNAME_LARGE";
     }
-
-    // might add rule that prohibits numbers
 }
 
 function validate_age($age, &$errors) : void {

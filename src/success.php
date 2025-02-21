@@ -12,10 +12,23 @@
 
 </head>
 <body>
-    <header>header</header>
+    <header><div style="height:1.3rem;"></div></header>
     <main>
-        <h1>Success</h1>
+        <div id="success-container">
+            <div id="success-box" class="shadow-box">
+                <p class="form-title colored-box">Successo</p>
+                <div id="success-message-box">
+                    <img src="assets/icon2.png" alt="icon">
+                    <div>
+                        <p>Registro concluido com sucesso, entraremos em contato em breve</p>
+                    </div>
+                </div>
+                <div id="success-button-box">
+                    <button class="form-button" onclick="location.href='/forms/register.php'">OK</button>
+                </div>
+            </div>
+        </div>
     </main>
-    <footer>footer</footer>
+    <footer>made by <a href="https://github.com/ViniciusKobs">Vinícius Kobs</a></footer>
 </body>
 </html>
