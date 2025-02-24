@@ -1,18 +1,12 @@
 <?php
 
 require_once "constants.php";
+require_once "locale.php";
 
 function validate() : void {
-    $data = [
-        "name" => $_POST["name"] ?? '',
-        "surname" => $_POST["surname"] ?? '',
-        "age" => $_POST["age"] ?? 0,
-        "email" => $_POST["email"] ?? '',
-        "cpf" => $_POST["cpf"] ?? '',
-        "password" => $_POST["password"] ?? '',
-        "confirm_password" => $_POST["confirm-password"] ?? ''
-    ];
-    $data = sanitize_data($data);
+    if (!is_valid_session()) { return; }
+
+    $data = get_data();
     $errors = [];
 
     validate_name($data["name"], $errors);
@@ -35,8 +29,59 @@ function validate() : void {
     header("Location: " . ERROR_URL . http_build_query(array_merge($data, $errors)));
 }
 
-function sanitize_data ($data) : array {
-    return array_map(function ($value) {return htmlspecialchars(trim($value));}, $data);
+function is_valid_session() : bool {
+    global $error_messages;
+
+    session_start();
+
+    if (empty($_POST["csrf-token"])) {
+        echo $error_messages["CSRF_POST_MISSING"];
+        return false;
+    }
+
+    if (empty($_SESSION["csrf_token"])) {
+        echo $error_messages["CSRF_SESSION_MISSING"];
+        return false;
+    }
+
+    if ($_POST["csrf-token"] !== $_SESSION["csrf_token"]) {
+        echo $error_messages["CSRF_INVALID"];
+        return false;
+    }
+
+    unset($_POST["csrf_token"], $_SESSION["csrf_token"]);
+
+    return true;
+}
+
+function get_data() : array {
+    // might implement sql sanitization
+    return [
+        "name" => htmlspecialchars(trim($_POST["name"] ?? '')),
+        "surname" => htmlspecialchars(trim($_POST["surname"] ?? '')),
+        "age" => htmlspecialchars(trim($_POST["age"] ?? '')),
+        "email" => htmlspecialchars(trim($_POST["email"] ?? '')),
+        "cpf" => htmlspecialchars(trim($_POST["cpf"] ?? '')),
+        "password" => htmlspecialchars(trim($_POST["password"] ?? '')),
+        "confirm_password" => htmlspecialchars(trim($_POST["confirm-password"] ?? ''))
+    ];
+}
+
+function store_data($data) : bool {
+    $path = getcwd() . STORAGE_PATH;
+
+    $content = file_get_contents($path);
+    if ($content === false) { return false; }
+
+    $storage = json_decode($content, true);
+    if ($storage === NULL && !empty(trim($content))) { return false; }
+
+    $storage[] = $data;
+
+    $status = file_put_contents($path, json_encode($storage, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    if ($status === false) { return false; }
+
+    return true;
 }
 
 function validate_name($name, &$errors) : void {
@@ -77,7 +122,14 @@ function validate_age($age, &$errors) : void {
         return;
     }
 
-    if ($age < 0 || $age > MAX_AGE) {
+    if (!preg_match('/^\d+$/', $age)) {
+        $errors["cpf_error"] = "AGE_NUMBER";
+        return;
+    }
+
+    $age_int = (int)$age;
+
+    if ($age_int < 0 || $age_int > MAX_AGE) {
         $errors["age_error"] = "AGE_INVALID";
     }
 }
@@ -184,23 +236,6 @@ function is_valid_cpf($cpf) : bool {
     $d2 = ($d2 % 11 < 2) ? 0 : 11 - ($d2 % 11);
 
     return $digits[9] === $d1 && $digits[10] === $d2;
-}
-
-function store_data($data) : bool {
-    $path = getcwd() . STORAGE_PATH;
-
-    $content = file_get_contents($path);
-    if ($content === false) { return false; }
-
-    $storage = json_decode($content, true);
-    if ($storage === NULL && !empty(trim($content))) { return false; }
-
-    $storage[] = $data;
-
-    $status = file_put_contents($path, json_encode($storage));
-    if ($status === false) { return false; }
-
-    return true;
 }
 
 validate();

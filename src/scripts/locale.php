@@ -2,7 +2,7 @@
 
 require_once "constants.php";
 
-$errors = [
+$error_messages = [
     "NAME_MISSING" => "O campo nome é obrigatório.",
     "NAME_NUMBER" => "O nome não deve conter dígitos.",
     "NAME_LARGE" => "O nome deve ter no máximo " . MAX_NAME_LENGTH . " caracteres.",
@@ -12,6 +12,7 @@ $errors = [
     "SURNAME_LARGE" => "O sobrenome deve ter no máximo " . MAX_NAME_LENGTH . " caracteres.",
 
     "AGE_MISSING" => "O campo idade é obrigatório.",
+    "AGE_NUMBER" => "A idade deve conter apenas dígitos.",
     "AGE_INVALID" => "A idade deve estar entre 0 e " . MAX_AGE . " anos.",
 
     "EMAIL_MISSING" => "O campo e-mail é obrigatório.",
@@ -32,5 +33,9 @@ $errors = [
     "CPF_MISSING" => "O campo CPF é obrigatório.",
     "CPF_WRONG_SIZE" => "O CPF deve conter 11 dígitos.",
     "CPF_NUMBER" => "O CPF deve conter apenas dígitos.",
-    "CPF_INVALID" => "Este CPF é inválido."
+    "CPF_INVALID" => "Este CPF é inválido.",
+
+    "CSRF_POST_MISSING" => "Token CSRF do POST ausente.",
+    "CSRF_SESSION_MISSING" => "Token CSRF da Sessão ausente.",
+    "CSRF_INVALID" => "Token CSRF inválido."
 ];
