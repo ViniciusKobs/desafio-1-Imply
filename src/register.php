@@ -20,13 +20,18 @@
     <header><div style="height:1.3rem;"></div></header>
     <main>
         <p id="page-title" class="color-change-effect">Cadastro</p>
-        <form class="shadow-box" action="scripts/validate.php" method="POST">
+
+        <form class="shadow-box" action="scripts/validate.php" method="POST" autocomplete="off">
             <p class="form-title colored-box">Formulário</p>
+
             <div id="form-container" class="inverse-shadow-box">
                 <div id="kiwi" class="form-container-child"></div>
+
                 <div class="separator"></div>
+
                 <div class="form-container-child">
                     <input type="hidden" name="csrf-token" value="<?php echo $_SESSION['csrf_token'] ?>">
+
                     <div class="form-input">
                         <label for="form-name">Nome</label>
                         <input type="text" id="form-name" class="inverse-shadow-box" name="name" placeholder="Nome" value="<?php echo htmlspecialchars($_GET["name"] ?? "") ?>">
@@ -36,6 +41,7 @@
                             }
                         ?>
                     </div>
+
                     <div class="form-input">
                         <label for="form-surname">Sobrenome</label>
                         <input type="text" id="form-surname" class="inverse-shadow-box" name="surname" placeholder="Sobrenome" value="<?php echo htmlspecialchars($_GET["surname"] ?? "") ?>">
@@ -45,6 +51,7 @@
                             }
                         ?>
                     </div>
+
                     <div class="form-input">
                         <label for="form-email">E-mail</label>
                         <input type="text" id="form-email" class="inverse-shadow-box" name="email" placeholder="E-mail" value="<?php echo htmlspecialchars($_GET["email"] ?? "") ?>">
@@ -54,6 +61,7 @@
                             }
                         ?>
                     </div>
+
                     <div class="form-input">
                         <label for="form-cpf">CPF</label>
                         <input type="text" id="form-cpf" class="inverse-shadow-box" name="cpf" placeholder="CPF" value="<?php echo htmlspecialchars($_GET["cpf"] ?? "") ?>">
@@ -63,6 +71,7 @@
                             }
                         ?>
                     </div>
+
                     <div class="form-input">
                         <label for="form-age">Idade</label>
                         <input type="number" id="form-age" class="inverse-shadow-box" name="age" placeholder="Idade" value="<?php echo htmlspecialchars($_GET["age"] ?? "") ?>">
@@ -72,6 +81,7 @@
                             }
                         ?>
                     </div>
+
                     <div class="form-input">
                         <label for="form-password">Senha</label>
                         <input type="password" id="form-password" class="inverse-shadow-box" name="password" placeholder="Senha" value="">
@@ -81,6 +91,7 @@
                             }
                         ?>
                     </div>
+
                     <div class="form-input">
                         <label for="form-confirm-password">Confirmar Senha</label>
                         <input type="password" id="form-confirm-password" class="inverse-shadow-box" name="confirm-password" placeholder="Confirmar Senha" value="">
@@ -90,6 +101,7 @@
                             }
                         ?>
                     </div>
+
                     <button id="form-submit" class="form-button" type="submit">Enviar</button>
                 </div>
             </div>

@@ -35,7 +35,7 @@ $error_messages = [
     "CPF_NUMBER" => "O CPF deve conter apenas dígitos.",
     "CPF_INVALID" => "Este CPF é inválido.",
 
-    "CSRF_POST_MISSING" => "Token CSRF do POST ausente.",
-    "CSRF_SESSION_MISSING" => "Token CSRF da Sessão ausente.",
-    "CSRF_INVALID" => "Token CSRF inválido."
+    "CSRF_POST_MISSING" => "Token da requisição ausente.",
+    "CSRF_SESSION_MISSING" => "Token da sessão ausente.",
+    "CSRF_INVALID" => "Token inválido."
 ];

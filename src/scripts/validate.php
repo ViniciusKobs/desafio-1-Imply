@@ -9,15 +9,8 @@ function validate() : void {
     $data = get_data();
     $errors = [];
 
-    validate_name($data["name"], $errors);
-    validate_surname($data["surname"], $errors);
-    validate_age($data["age"], $errors);
-    validate_email($data["email"], $errors);
-    validate_cpf($data["cpf"], $errors);
-    validate_password($data["password"], $errors);
-    confirm_password($data["password"], $data["confirm_password"], $errors);
+    validate_data($data, $errors);
 
-    // erasing password history for security reasons
     unset($data["password"], $data["confirm_password"]);
 
     if (empty($errors)) {
@@ -35,17 +28,17 @@ function is_valid_session() : bool {
     session_start();
 
     if (empty($_POST["csrf-token"])) {
-        echo $error_messages["CSRF_POST_MISSING"];
+        echo $error_messages["CSRF_POST_MISSING"] . '<br><a href="' . ERROR_URL . '">voltar ao formulario</a>';
         return false;
     }
 
     if (empty($_SESSION["csrf_token"])) {
-        echo $error_messages["CSRF_SESSION_MISSING"];
+        echo $error_messages["CSRF_SESSION_MISSING"] . '<br><a href="' . ERROR_URL . '">voltar ao formulario</a>';
         return false;
     }
 
     if ($_POST["csrf-token"] !== $_SESSION["csrf_token"]) {
-        echo $error_messages["CSRF_INVALID"];
+        echo $error_messages["CSRF_INVALID"] . '<br><a href="' . ERROR_URL . '">voltar ao formulario</a>';
         return false;
     }
 
@@ -55,7 +48,6 @@ function is_valid_session() : bool {
 }
 
 function get_data() : array {
-    // might implement sql sanitization
     return [
         "name" => htmlspecialchars(trim($_POST["name"] ?? '')),
         "surname" => htmlspecialchars(trim($_POST["surname"] ?? '')),
@@ -65,6 +57,16 @@ function get_data() : array {
         "password" => htmlspecialchars(trim($_POST["password"] ?? '')),
         "confirm_password" => htmlspecialchars(trim($_POST["confirm-password"] ?? ''))
     ];
+}
+
+function validate_data($data, &$errors) : void {
+    validate_name($data["name"], $errors);
+    validate_surname($data["surname"], $errors);
+    validate_age($data["age"], $errors);
+    validate_email($data["email"], $errors);
+    validate_cpf($data["cpf"], $errors);
+    validate_password($data["password"], $errors);
+    confirm_password($data["password"], $data["confirm_password"], $errors);
 }
 
 function store_data($data) : bool {
@@ -123,7 +125,7 @@ function validate_age($age, &$errors) : void {
     }
 
     if (!preg_match('/^\d+$/', $age)) {
-        $errors["cpf_error"] = "AGE_NUMBER";
+        $errors["age_error"] = "AGE_NUMBER";
         return;
     }
 
